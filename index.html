@@ -10,6 +10,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Student Sign-In Modal -->
+    <div id="student-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem; border: none; padding: 0;">
+                <i class="fa-solid fa-brain"></i>
+                <h2>NeuroReview</h2>
+            </div>
+            <h2 style="font-size: 1.8rem; background: none; -webkit-text-fill-color: var(--text-main);">Student Sign-In</h2>
+            <p>Please enter your information to begin.</p>
+            <div class="form-group">
+                <label for="studentName">First & Last Name</label>
+                <input type="text" id="studentName" placeholder="e.g. Jane Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="studentPeriod">Class Period</label>
+                <select id="studentPeriod">
+                    <option value="Period 1">Period 1</option>
+                    <option value="Period 2">Period 2</option>
+                    <option value="Period 3">Period 3</option>
+                    <option value="Period 4">Period 4</option>
+                    <option value="Period 5">Period 5</option>
+                    <option value="Period 6">Period 6</option>
+                    <option value="Period 7">Period 7</option>
+                </select>
+            </div>
+            <button class="primary-btn" id="start-simlab-btn" style="width: 100%; justify-content: center;">Enter SimLab</button>
+        </div>
+    </div>
+
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
@@ -345,7 +374,11 @@
                     <div id="quiz-results" class="hidden">
                         <h3>Simulation Complete!</h3>
                         <p id="score-text"></p>
-                        <button class="primary-btn" id="restart-quiz-btn"><i class="fa-solid fa-rotate-right"></i> Restart Simulation</button>
+                        <div class="submission-area">
+                            <button class="primary-btn" id="submit-quiz-score-btn" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 0;"><i class="fa-solid fa-paper-plane"></i> Submit Score to Teacher</button>
+                            <p id="quiz-submit-status" class="submit-status"></p>
+                        </div>
+                        <button class="primary-btn" id="restart-quiz-btn" style="background: rgba(255,255,255,0.1);"><i class="fa-solid fa-rotate-right"></i> Restart Simulation</button>
                     </div>
                 </div>
             </section>
@@ -391,7 +424,11 @@
                         <div class="performance-bar">
                             <div class="perf-fill" id="c-perf-fill"></div>
                         </div>
-                        <button class="primary-btn" id="restart-clinic-btn"><i class="fa-solid fa-rotate-right"></i> Start New Shift</button>
+                        <div class="submission-area">
+                            <button class="primary-btn" id="submit-clinic-score-btn" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 0;"><i class="fa-solid fa-paper-plane"></i> Submit Score to Teacher</button>
+                            <p id="clinic-submit-status" class="submit-status"></p>
+                        </div>
+                        <button class="primary-btn" id="restart-clinic-btn" style="background: rgba(255,255,255,0.1);"><i class="fa-solid fa-rotate-right"></i> Start New Shift</button>
                     </div>
                 </div>
             </section>

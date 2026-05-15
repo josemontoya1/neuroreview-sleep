@@ -456,3 +456,88 @@ if(restartClinicBtn) {
 
 // Initialize
 loadPatient();
+
+// --- Google Forms Integration ---
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc6ULPQtxF9eb9tNYjHFc9TE9lXh1LcBDYCKij3tMK3ylRvwA/formResponse";
+const ENTRY_NAME = "entry.1152256098"; 
+const ENTRY_PERIOD = "entry.514329185";
+const ENTRY_MODULE = "entry.1797924472";
+const ENTRY_SCORE = "entry.590190009";
+
+let studentInfo = {
+    name: "",
+    period: "Period 1"
+};
+
+// Modal Logic
+const modal = document.getElementById('student-modal');
+const startBtn = document.getElementById('start-simlab-btn');
+const nameInput = document.getElementById('studentName');
+const periodInput = document.getElementById('studentPeriod');
+
+if(startBtn && modal) {
+    startBtn.addEventListener('click', () => {
+        if(nameInput.value.trim() === '') {
+            alert("Please enter your name!");
+            return;
+        }
+        studentInfo.name = nameInput.value.trim();
+        studentInfo.period = periodInput.value;
+        modal.style.opacity = '0';
+        setTimeout(() => { modal.style.display = 'none'; }, 300);
+    });
+}
+
+// Generic Submission Function
+function submitToGoogleForm(moduleName, scoreString, statusElementId, buttonId) {
+    const statusEl = document.getElementById(statusElementId);
+    const btnEl = document.getElementById(buttonId);
+    
+    if(!statusEl || !btnEl) return;
+    
+    statusEl.style.display = "block";
+    statusEl.textContent = "Submitting to teacher...";
+    btnEl.disabled = true;
+    btnEl.style.opacity = "0.5";
+
+    // Create the form data using the Google Form Entry IDs
+    const formData = new FormData();
+    formData.append(ENTRY_NAME, studentInfo.name);
+    formData.append(ENTRY_PERIOD, studentInfo.period);
+    formData.append(ENTRY_MODULE, moduleName);
+    formData.append(ENTRY_SCORE, scoreString);
+
+    // Send the data without expecting a standard web response
+    fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+    })
+    .then(() => {
+        statusEl.textContent = "✅ Score successfully submitted to your teacher!";
+        statusEl.style.color = "#10b981"; // Green
+    })
+    .catch((error) => {
+        statusEl.textContent = "❌ Error submitting. Please tell your teacher.";
+        statusEl.style.color = "#ef4444"; // Red
+        btnEl.disabled = false;
+        btnEl.style.opacity = "1";
+    });
+}
+
+// Bind submission buttons
+const submitQuizBtn = document.getElementById('submit-quiz-score-btn');
+if(submitQuizBtn) {
+    submitQuizBtn.addEventListener('click', () => {
+        const scoreStr = `${score} / ${quizData.length}`;
+        submitToGoogleForm("Simulation Quiz", scoreStr, "quiz-submit-status", "submit-quiz-score-btn");
+    });
+}
+
+const submitClinicBtn = document.getElementById('submit-clinic-score-btn');
+if(submitClinicBtn) {
+    submitClinicBtn.addEventListener('click', () => {
+        const scoreStr = `${clinicScore} / ${clinicData.length}`;
+        submitToGoogleForm("Clinic Simulator", scoreStr, "clinic-submit-status", "submit-clinic-score-btn");
+    });
+}
