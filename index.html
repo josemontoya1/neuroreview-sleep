@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroReview: Sleep Cycles SimLab</title>
+    <meta name="description" content="Interactive AP Psychology lesson on the science of sleep, sleep cycles, and consciousness.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-brain"></i>
+                <h2>NeuroReview</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="intro"><i class="fa-solid fa-moon"></i> The Science of Sleep</li>
+                <li data-target="circadian"><i class="fa-solid fa-clock"></i> Circadian Rhythms</li>
+                <li data-target="consciousness"><i class="fa-solid fa-layer-group"></i> Consciousness</li>
+                <li data-target="stages"><i class="fa-solid fa-wave-square"></i> Sleep Stages</li>
+                <li data-target="theories"><i class="fa-solid fa-cloud"></i> Theories & Dreams</li>
+                <li data-target="disorders"><i class="fa-solid fa-bed-pulse"></i> Sleep Disorders</li>
+                <li data-target="exam"><i class="fa-solid fa-graduation-cap"></i> AP Strategies</li>
+                <li data-target="quiz"><i class="fa-solid fa-gamepad"></i> Simulation Quiz</li>
+                <li data-target="clinic"><i class="fa-solid fa-user-doctor"></i> Clinic Simulator</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <!-- Intro Section -->
+            <section id="intro" class="active-section panel">
+                <div class="hero">
+                    <h1>The Science of Sleep</h1>
+                    <p class="subtitle">AP Psychology SimLab Module</p>
+                    <p>Sleep is not just a passive state; it's a dynamic biological process essential for survival, memory consolidation, tissue repair, and energy restoration.</p>
+                    <button class="primary-btn" onclick="navigateTo('circadian')">Start Module <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </section>
+
+            <!-- Circadian Rhythm Section -->
+            <section id="circadian" class="panel">
+                <h2>Circadian Rhythms</h2>
+                <p>Your 24-hour biological pattern regulating alertness and sleepiness.</p>
+                <div class="interactive-circadian">
+                    <div class="sun-moon-tracker">
+                        <div class="cycle-indicator" id="cycleIndicator"></div>
+                    </div>
+                    <input type="range" min="0" max="24" value="12" step="0.5" id="timeSlider" class="slider">
+                    <div class="time-display" id="timeDisplay">12:00 PM</div>
+                    
+                    <div class="hormone-levels">
+                        <div class="hormone-bar">
+                            <span>Melatonin (Sleep Hormone)</span>
+                            <div class="bar-bg"><div class="bar-fill" id="melatoninFill"></div></div>
+                        </div>
+                        <div class="hormone-bar">
+                            <span>Cortisol (Wake Hormone)</span>
+                            <div class="bar-bg"><div class="bar-fill" id="cortisolFill"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3><i class="fa-solid fa-microchip"></i> Suprachiasmatic Nucleus</h3>
+                        <p>The control center in the hypothalamus. Light suppresses melatonin and increases cortisol. Screen time and jet lag can cause significant disruptions!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Consciousness Section -->
+            <section id="consciousness" class="panel">
+                <h2>Levels of Consciousness</h2>
+                <p>Awareness of yourself and your surroundings, maintained by the <strong>reticular activating system</strong>.</p>
+                
+                <div class="consciousness-spectrum">
+                    <div class="c-level" data-level="wake">
+                        <div class="icon">
+                            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="14" fill="url(#sunGrad)" />
+                                <path d="M32 4V10M32 54V60M4 32H10M54 32H60M12.2 12.2L16.4 16.4M47.6 47.6L51.8 51.8M12.2 51.8L16.4 47.6M47.6 12.2L51.8 16.4" stroke="url(#sunGrad)" stroke-width="4" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="sunGrad" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#FDE047" />
+                                        <stop offset="1" stop-color="#F59E0B" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Full Wakefulness</h3>
+                        <p>Alert, focused, aware.</p>
+                    </div>
+                    <div class="c-level" data-level="drowsy">
+                        <div class="icon">
+                            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 32C8 32 18 16 32 16C46 16 56 32 56 32" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="32" cy="32" r="8" fill="url(#eyeGrad)"/>
+                                <path d="M32 16V22" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+                                <rect x="0" y="32" width="64" height="32" fill="#0A0E17" opacity="0.8"/>
+                                <path d="M8 32C8 32 18 40 32 40C46 40 56 32 56 32" stroke="#F472B6" stroke-width="4" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="eyeGrad" x1="24" y1="24" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#38BDF8" />
+                                        <stop offset="1" stop-color="#818CF8" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Drowsiness</h3>
+                        <p>Aware but less responsive.</p>
+                    </div>
+                    <div class="c-level" data-level="sleep">
+                        <div class="icon">
+                            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M36 12C24.9543 12 16 20.9543 16 32C16 43.0457 24.9543 52 36 52C32 52 24 48 24 32C24 16 32 12 36 12Z" fill="url(#moonGrad)"/>
+                                <path d="M44 20H52L44 28H52" stroke="#A78BFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M50 10H56L50 16H56" stroke="#C4B5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="moonGrad" x1="24" y1="12" x2="36" y2="52" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#818CF8" />
+                                        <stop offset="1" stop-color="#C084FC" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Sleep</h3>
+                        <p>Deeper state, largely unaware but processing info.</p>
+                    </div>
+                    <div class="c-level" data-level="coma">
+                        <div class="icon">
+                            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 32H20L24 24L32 44L36 32H60" stroke="url(#comaGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <defs>
+                                    <linearGradient id="comaGrad" x1="4" y1="32" x2="60" y2="32" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#0EA5E9" opacity="0.2"/>
+                                        <stop offset="0.5" stop-color="#0EA5E9" />
+                                        <stop offset="1" stop-color="#0EA5E9" opacity="0.2"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Coma</h3>
+                        <p>Severely reduced or absent consciousness.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sleep Stages Section -->
+            <section id="stages" class="panel">
+                <h2>The Stages of Sleep</h2>
+                <p>A typical 90-minute cycle repeats 4-6 times a night, tracked via EEG.</p>
+                
+                <div class="sleep-stages-interactive">
+                    <div class="stage-tabs">
+                        <button class="stage-tab active" data-stage="stage1">NREM-1</button>
+                        <button class="stage-tab" data-stage="stage2">NREM-2</button>
+                        <button class="stage-tab" data-stage="stage3">NREM-3</button>
+                        <button class="stage-tab" data-stage="rem">REM</button>
+                    </div>
+                    
+                    <div class="stage-content active" id="stage1-content">
+                        <div class="wave-visualizer theta-wave"></div>
+                        <div class="stage-details">
+                            <h3>NREM-1 (Transition)</h3>
+                            <p><strong>Duration:</strong> 5-10 minutes</p>
+                            <p><strong>Brain Waves:</strong> Slowing theta waves</p>
+                            <ul>
+                                <li>Transition from wakefulness to sleep.</li>
+                                <li>May experience <strong>hypnic jerks</strong> (sudden muscle spasms).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="stage-content" id="stage2-content">
+                        <div class="wave-visualizer spindle-wave"></div>
+                        <div class="stage-details">
+                            <h3>NREM-2 (Light Sleep)</h3>
+                            <p><strong>Duration:</strong> 45-55% of total sleep</p>
+                            <p><strong>Brain Waves:</strong> Sleep spindles & K-complexes</p>
+                            <ul>
+                                <li>Heart rate slows and body temperature drops.</li>
+                                <li>Brief bursts of rapid brain activity (spindles).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="stage-content" id="stage3-content">
+                        <div class="wave-visualizer delta-wave"></div>
+                        <div class="stage-details">
+                            <h3>NREM-3 (Deep / Slow-Wave Sleep)</h3>
+                            <p><strong>Brain Waves:</strong> Slow delta waves</p>
+                            <ul>
+                                <li>Most physically restorative stage.</li>
+                                <li>Growth hormone released; tissues repaired.</li>
+                                <li>Sleepwalking/talking can occur here.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="stage-content" id="rem-content">
+                        <div class="wave-visualizer rem-wave"></div>
+                        <div class="stage-details">
+                            <h3>REM (Paradoxical Sleep)</h3>
+                            <p><strong>Brain Waves:</strong> Fast, wake-like waves</p>
+                            <ul>
+                                <li>Heart rate increases, vivid dreams occur.</li>
+                                <li><strong>REM atonia:</strong> Muscles paralyzed to prevent acting out dreams.</li>
+                                <li>Essential for memory consolidation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Theories & Dreams -->
+            <section id="theories" class="panel">
+                <h2>Theories of Sleep & Dreaming</h2>
+                <div class="theories-grid">
+                    <div class="theory-card">
+                        <h3><i class="fa-solid fa-battery-full"></i> Restorative Theory</h3>
+                        <p>Sleep restores your body and brain (tissue repair, memory consolidation).</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3><i class="fa-solid fa-shield-halved"></i> Adaptive Theory</h3>
+                        <p>Sleep evolved to keep animals inactive and safe during vulnerable times.</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3><i class="fa-solid fa-bolt"></i> Activation-Synthesis</h3>
+                        <p>Dreams are the brain's attempt to make sense of random neural noise during REM sleep.</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3><i class="fa-solid fa-box-archive"></i> Memory Consolidation</h3>
+                        <p>Dreams reflect the brain processing and organizing daily experiences into long-term memory.</p>
+                    </div>
+                </div>
+                <div class="alert tip">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <p><strong>Tip:</strong> These theories are not mutually exclusive. Activation-synthesis can coexist with memory consolidation.</p>
+                </div>
+            </section>
+
+            <!-- Disorders Section -->
+            <section id="disorders" class="panel">
+                <h2>Common Sleep Disorders</h2>
+                <div class="disorders-grid">
+                    <div class="disorder-card">
+                        <div class="card-front">
+                            <h3>Insomnia</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Difficulty falling asleep, staying asleep, or getting restorative sleep.</p>
+                        </div>
+                    </div>
+                    <div class="disorder-card">
+                        <div class="card-front">
+                            <h3>Sleep Apnea</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Breathing repeatedly stops and starts. Treated with a CPAP machine.</p>
+                        </div>
+                    </div>
+                    <div class="disorder-card">
+                        <div class="card-front">
+                            <h3>Narcolepsy</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Irresistible sleepiness and sudden REM "sleep attacks." Involves cataplexy (muscle tone loss) and low hypocretin.</p>
+                        </div>
+                    </div>
+                    <div class="disorder-card">
+                        <div class="card-front">
+                            <h3>Restless Leg Syndrome</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Uncomfortable sensations in the legs and an irresistible urge to move them, disrupting sleep.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exam Prep Section -->
+            <section id="exam" class="panel">
+                <h2>AP Exam Test-Taking Strategies</h2>
+                
+                <div class="flashcards">
+                    <div class="flashcard">
+                        <div class="front">MICE Mnemonic</div>
+                        <div class="back"><strong>M</strong>emory, <strong>I</strong>mmune, <strong>C</strong>learing waste, <strong>E</strong>nergy</div>
+                    </div>
+                    <div class="flashcard">
+                        <div class="front">NREM vs REM</div>
+                        <div class="back">NREM-3 is physically restorative. REM is for memory & vivid dreams.</div>
+                    </div>
+                    <div class="flashcard">
+                        <div class="front">Neurotransmitters</div>
+                        <div class="back">Low Hypocretin = Narcolepsy.<br>Low Serotonin = Depression.</div>
+                    </div>
+                    <div class="flashcard">
+                        <div class="front">Brain Structures</div>
+                        <div class="back">Suprachiasmatic Nucleus: Circadian.<br>Brain Stem: Reticular Activating System.</div>
+                    </div>
+                </div>
+
+                <div class="alert important">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p><strong>Pitfall Alert:</strong> Dreams <em>can</em> occur in NREM (just less vivid). Also, REM is NOT the most physically restorative stage—that's NREM-3!</p>
+                </div>
+            </section>
+
+            <!-- Simulation Quiz Section -->
+            <section id="quiz" class="panel">
+                <h2>Simulation Quiz: Clinical Observation</h2>
+                <p>Observe the patient's symptoms and EEG readings, then diagnose their current sleep stage.</p>
+                
+                <div class="quiz-container">
+                    <div id="quiz-screen">
+                        <div class="quiz-scenario">
+                            <div class="monitor">
+                                <canvas id="eeg-canvas" width="600" height="100"></canvas>
+                            </div>
+                            <h3 id="question-text">Loading simulation...</h3>
+                        </div>
+                        
+                        <div class="quiz-options">
+                            <button class="quiz-btn" data-answer="stage1">NREM-1</button>
+                            <button class="quiz-btn" data-answer="stage2">NREM-2</button>
+                            <button class="quiz-btn" data-answer="stage3">NREM-3</button>
+                            <button class="quiz-btn" data-answer="rem">REM</button>
+                        </div>
+                    </div>
+                    
+                    <div id="quiz-feedback" class="hidden">
+                        <h3 id="feedback-title"></h3>
+                        <p id="feedback-text"></p>
+                        <div id="mini-lesson" class="mini-lesson hidden">
+                            <h4><i class="fa-solid fa-book-open"></i> Mini-Lesson Review</h4>
+                            <p id="mini-lesson-text"></p>
+                        </div>
+                        <button class="primary-btn" id="next-question-btn">Next Scenario <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div id="quiz-results" class="hidden">
+                        <h3>Simulation Complete!</h3>
+                        <p id="score-text"></p>
+                        <button class="primary-btn" id="restart-quiz-btn"><i class="fa-solid fa-rotate-right"></i> Restart Simulation</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clinic Simulator Section -->
+            <section id="clinic" class="panel">
+                <h2>Sleep Clinic: Patient Diagnostics</h2>
+                <p>10 patients are waiting in the clinic. Evaluate their symptoms and diagnose the correct sleep disorder.</p>
+                
+                <div class="clinic-container">
+                    <div id="clinic-screen">
+                        <div class="patient-card">
+                            <div class="patient-avatar"><i class="fa-solid fa-hospital-user"></i></div>
+                            <div class="patient-info">
+                                <h3 id="patient-id">Patient #1</h3>
+                                <div class="chat-bubble">
+                                    <p id="patient-quote">"Loading patient data..."</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="diagnosis-options">
+                            <button class="clinic-btn" data-diagnosis="Insomnia">Insomnia</button>
+                            <button class="clinic-btn" data-diagnosis="Sleep Apnea">Sleep Apnea</button>
+                            <button class="clinic-btn" data-diagnosis="Narcolepsy">Narcolepsy</button>
+                            <button class="clinic-btn" data-diagnosis="Restless Leg Syndrome">Restless Leg Syndrome</button>
+                        </div>
+                    </div>
+                    
+                    <div id="clinic-feedback" class="hidden">
+                        <h3 id="c-feedback-title"></h3>
+                        <p id="c-feedback-text"></p>
+                        <div class="alert tip">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            <p id="c-explanation"></p>
+                        </div>
+                        <button class="primary-btn" id="next-patient-btn">Next Patient <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div id="clinic-results" class="hidden">
+                        <h3>Clinical Shifts Complete!</h3>
+                        <p id="c-score-text"></p>
+                        <div class="performance-bar">
+                            <div class="perf-fill" id="c-perf-fill"></div>
+                        </div>
+                        <button class="primary-btn" id="restart-clinic-btn"><i class="fa-solid fa-rotate-right"></i> Start New Shift</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
